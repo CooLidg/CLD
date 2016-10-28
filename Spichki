@@ -1,0 +1,71 @@
+package cld.games;
+
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+public class Game {
+
+	public static void main(String[] args) {
+		int machHeap = 15;
+		String winMessage;
+		Random r = new Random();
+		boolean isFirstPlayerAlloved = r.nextBoolean();
+		
+		while(true){
+			int move;
+
+			//                   Хід першого гравця
+			if (isFirstPlayerAlloved) {
+			move = playerMove(machHeap);
+			machHeap = machHeap - move;
+			
+			//                    Перевірка
+			
+			if (machHeap <= 0){
+				winMessage = "Ти програв, твоя квартира тепер моя!!!";
+				break;
+			}
+			    }
+			isFirstPlayerAlloved = true;
+			//                    Хід другого гравця
+			
+			move = goodMove(machHeap);
+			
+			JOptionPane.showMessageDialog(null,
+					" На купці зараз: "+machHeap+" сірників. Комп'ютер взяв: "+move+" сірників. ");
+			machHeap = machHeap - move;
+			
+			//                       Перевірка
+			
+			if (machHeap <=0){
+				winMessage = "Тобі просто повезло... ";
+				break;
+			}
+		}
+        JOptionPane.showMessageDialog(null, winMessage);
+	}
+    public static int badMove(int state ){
+    	Random r = new Random();
+		int result = r.nextInt(3)+1;
+		return result;
+    }
+    public static int goodMove(int state ){
+    	int result = state % 4 - 1;
+    	if (result ==0){
+    		result = badMove(state);
+    	}
+    	if (result < 0){
+    		result = 3;
+    	}
+		return result;
+		}
+    public static int playerMove(int stage){
+    	int result = 0;
+    	do {
+    	    String s = JOptionPane.showInputDialog(" Хід гравця. на купці зараз: "+stage+" сірників. Введіть 1, 2 або 3 " );
+		    result = Integer.parseInt(s);
+    	}while (result <=0 || result > 3 || result > stage );
+    	return result;
+    }
+}
