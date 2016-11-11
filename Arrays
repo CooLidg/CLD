@@ -1,0 +1,41 @@
+package cld.arrays;
+
+import javax.swing.JOptionPane;
+
+public class Arrays {
+
+	public static void main(String[] args) {
+		int[] arrayA;
+		double[] arrayB = new double[100];
+		
+		arrayB[1]=1.1;
+		
+		double d = arrayB[5];
+		
+		String students[] = new String[] {"Бернацький Олександр","Дзьоба Микола","Касіян Роман","Кріслатий Влад","Півень Сергій",
+				"Полюк Богдан","Полюк Тарас","Савчин Іван","Синьків Володя","Соболь Юля","Спірін Міша","Стефанишин Антон","Уманців Назар","Шіман Маріус"};
+	
+		String is = JOptionPane.showInputDialog("Введіть порядковий номер");
+		int i = Integer.valueOf(is);
+		
+		JOptionPane.showMessageDialog(null, students[i]);
+		
+	
+		for (int j=students.length-1; j >= 0; j--){
+				System.out.println(students[j]);
+				}
+		
+	
+	//         Вивід на екран та цикл
+		
+	//	System.out.println(students[0]);
+	//	System.out.println(students[1]);
+	//	System.out.println(students[13]);
+		
+	//	for (int i=0; i<students.length; i++){
+	//		System.out.println(students[i]);
+	//	}
+
+	}
+
+}
