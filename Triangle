@@ -1,0 +1,27 @@
+package cld.company;
+
+import javax.swing.JOptionPane;
+
+public class Trianglr {
+
+	public static void main(String[] args) {
+		String q = JOptionPane.showInputDialog("Введіть а");
+		double a = Double.valueOf(q);
+		
+		String w = JOptionPane.showInputDialog("Введіть b");
+		double b = Double.valueOf(w);
+		
+		String e = JOptionPane.showInputDialog("Введіть c");
+		double c = Double.valueOf(e);
+		
+		if (a+b>=c && a+c>=b && b+c>=a)
+		{
+			JOptionPane.showMessageDialog(null, "Трикутник можливий");
+		} 
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Трикутник неможе існувати");
+        }
+	}
+
+}
