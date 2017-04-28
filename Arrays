@@ -1,41 +1,100 @@
-package cld.arrays;
+package cld.company;
 
-import javax.swing.JOptionPane;
+import java.util.Arrays;
+import java.util.Locale;
 
-public class Arrays {
+import javax.crypto.MacSpi;
+import javax.swing.text.AbstractDocument.LeafElement;
 
-	public static void main(String[] args) {
-		int[] arrayA;
-		double[] arrayB = new double[100];
-		
-		arrayB[1]=1.1;
-		
-		double d = arrayB[5];
-		
-		String students[] = new String[] {"Бернацький Олександр","Дзьоба Микола","Касіян Роман","Кріслатий Влад","Півень Сергій",
-				"Полюк Богдан","Полюк Тарас","Савчин Іван","Синьків Володя","Соболь Юля","Спірін Міша","Стефанишин Антон","Уманців Назар","Шіман Маріус"};
+public class Strin {
 	
-		String is = JOptionPane.showInputDialog("Введіть порядковий номер");
-		int i = Integer.valueOf(is);
-		
-		JOptionPane.showMessageDialog(null, students[i]);
-		
-	
-		for (int j=students.length-1; j >= 0; j--){
-				System.out.println(students[j]);
-				}
-		
-	
-	//         Вивід на екран та цикл
-		
-	//	System.out.println(students[0]);
-	//	System.out.println(students[1]);
-	//	System.out.println(students[13]);
-		
-	//	for (int i=0; i<students.length; i++){
-	//		System.out.println(students[i]);
-	//	}
+    public static void main(String[] args) {
+    	char value1[]={'a','b','c' };
+    	char value2[]={'d','f','g','h'  };
+    	
+    	Strin s1 = new Strin(value1);
+    	Strin s2 = new Strin(value2);
 
+    
+    	s1.swap(s2);
+    		
 	}
 
+	private final char[] value;
+
+		
+	public Strin(char value[]) {
+        this.value = Arrays.copyOf(value, value.length);
+    }
+	
+    public Strin(char value[], int offset, int count) {
+        if (offset < 0) {
+            throw new StringIndexOutOfBoundsException(offset);
+        }
+        if (count < 0) {
+            throw new StringIndexOutOfBoundsException(count);
+        }
+        // Note: offset or count might be near -1>>>1.
+        if (offset > value.length - count) {
+            throw new StringIndexOutOfBoundsException(offset + count);
+        }
+        this.value = Arrays.copyOfRange(value, offset, offset+count);
+    }
+	public int length() {
+        return value.length;
+    }
+	
+	
+	public Strin substring(int beginIndex, int endIndex) {
+        if (beginIndex < 0) {
+            throw new StringIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > value.length) {
+            throw new StringIndexOutOfBoundsException(endIndex);
+        }
+        int subLen = endIndex - beginIndex;
+        if (subLen < 0) {
+            throw new StringIndexOutOfBoundsException(subLen);
+        }
+        return ((beginIndex == 0) && (endIndex == value.length)) ? this : new Strin(value, beginIndex, subLen);
+    }
+	
+	
+	public Strin toUpperCase() {
+        for(int i=0; i<length(); i++) {
+        	if(value[i] >= 97 && value[i] <=122){
+        		value[i] -= 32;
+        	}
+        }
+        return this;
+    }
+	
+	
+	public Strin toLowerCase() {
+		for(int i=0; i<length(); i++) {
+        	if(value[i] >= 65 && value[i] <=90){
+        		value[i] += 32;
+        	}
+        }
+        return this;
+        
+    }
+	
+	public Strin concat(String str) {
+        int otherLen = str.length();
+        if (otherLen == 0) {
+            return this;
+        }
+        int len = value.length;
+        char buf[] = Arrays.copyOf(value, len + otherLen);
+        str.getChars(buf, len);
+        return new Strin(buf, true);
+    }
+	
+	public void swap(Strin other){
+		Strin temp;
+		temp = s1;
+		s1 = s2;
+		s2 = temp;
+	}
 }
